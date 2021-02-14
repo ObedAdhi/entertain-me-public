@@ -49,7 +49,7 @@ class MovieController {
       if (updatedMovie.result.n === 0) {
         next({name: 'NOT_FOUND'})
       } else {
-        res.status(200).json({message: 'Movie data updated'})
+        res.status(200).json({message: 'Movie data updated', status: updatedMovie.result})
       }
 
     } catch (error) {
@@ -65,7 +65,7 @@ class MovieController {
       if (deleteStatus.result.n === 0) {
         next({name: 'NOT_FOUND'})
       } else {
-        res.status(200).json({message: "Movie data deleted"})
+        res.status(200).json({message: "Movie data deleted", status: deleteStatus.result})
       }
 
     } catch (error) {

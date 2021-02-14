@@ -49,7 +49,7 @@ class TVSeriesController {
       if (updatedTVSeries.result.n === 0) {
         next({name: 'NOT_FOUND'})
       } else {
-        res.status(200).json({message: 'TVSeries data updated'})
+        res.status(200).json({message: 'TVSeries data updated', status: updatedTVSeries.result})
       }
 
     } catch (error) {
@@ -65,7 +65,7 @@ class TVSeriesController {
       if (deleteStatus.result.n === 0) {
         next({name: 'NOT_FOUND'})
       } else {
-        res.status(200).json({message: "TVSeries data deleted"})
+        res.status(200).json({message: "TVSeries data deleted", status: deleteStatus.result})
       }
 
     } catch (error) {
