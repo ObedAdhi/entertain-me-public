@@ -22,7 +22,7 @@ const typeDefs = gql`
   }
 
   type DeleteResponse {
-    OK: Boolean!
+    OK: String
   }
   
   extend type Query {
