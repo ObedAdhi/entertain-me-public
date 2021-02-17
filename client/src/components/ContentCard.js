@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { GET_ALL, Delete_Movie, Get_Collection_Movie } from "../config/query";
 import { collectionMovieVar } from "../config/cache";
 import { useEffect } from "react";
+import Swal from 'sweetalert2'
 
 
 function ContentCard (props) {
@@ -23,11 +24,25 @@ function ContentCard (props) {
   });
 
   function handleDelete () {
-    deleteMovie({
-      variables: {
-        id
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Delete`,
+      denyButtonText: `cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMovie({
+          variables: {
+            id
+          }
+        })
+        Swal.fire('Data deleted!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Canceled', '', 'info')
       }
     })
+
   }
 
   function handleToDetail () {
@@ -42,7 +57,9 @@ function ContentCard (props) {
     if ((data.collectionMovie.findIndex(element => element._id === props.props._id)) === -1 ) {
       const currentCollection = collectionMovieVar()
       collectionMovieVar([...currentCollection, props.props])
-
+      Swal.fire({icon: 'success', title: 'Added to Favorite'})
+    } else {
+      Swal.fire({icon: 'warning', title: 'Movie already added to Favorite'})
     }
   }
 

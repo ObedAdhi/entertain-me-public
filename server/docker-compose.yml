@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    command: mongod
+
+  redis:
+    image: "redis:latest"
+    ports:
+      - "6379:6379"
+    command: redis-server
+
+  movies:
+    build: ./services/movies
+    depends_on: 
+      - mongo
+    ports:
+      - "4001:4001"
+
+  tvseries:
+    build: ./services/tvseries
+    depends_on: 
+      - mongo
+    ports:
+      - "4002:4002"
+
+  entertainme:
+    build: ./orchestrator
+    depends_on: 
+      - mongo
+      - redis
+    ports:
+      - "4000:4000"

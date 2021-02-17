@@ -2,18 +2,18 @@ module.exports = {
   apps: [
     {
        name: 'entertainme - Client',
-       script: './client && npm install && npm start',
+       script: './client ; npm install ; npm start',
     },
     {
       name: 'entertainme - Orchestrator',
-      script: './server/orchestrator && npm install && nodemon app.js',
+      script: './server/orchestrator ; npm install ; nodemon app.js',
       env: {
         PORT: 4000
       },
     },
     {
       name: 'entertainme - Service Movies',
-      script: './server/services/movies && npm install && nodemon app.js',
+      script: './server/services/movies ; npm install ; nodemon app.js',
       env: {
         DATABASE_NAME: "entertainme",
         COLLECTION_NAME: "movies",
@@ -22,7 +22,7 @@ module.exports = {
     },
     {
       name: 'entertainme - Service TV Series',
-      script: './server/services/tvseries && npm install && nodemon app.js',
+      script: './server/services/tvseries ; npm install ; nodemon app.js',
       env: {
         DATABASE_NAME: "entertainme",
         COLLECTION_NAME: "tvseries",

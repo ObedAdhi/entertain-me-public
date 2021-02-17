@@ -1,8 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
+import Swal from "sweetalert2";
 import { Add_Movie, GET_ALL, get_movie, Update_Movie} from "../config/query";
-
 
 
 function FormAddEdit() {
@@ -33,10 +33,21 @@ function FormAddEdit() {
   })
 
 
+  useEffect(() => {
+    if (Movie && id) {
+      setTitle(Movie.movie.title)
+      setOverview(Movie.movie.overview)
+      setPoster_path(Movie.movie.poster_path)
+      setPopularity(Movie.movie.popularity)
+      setTags(Movie.movie.tags)
+    }
+  }, [Movie])
+
+
   if (!id) {
     function handleAddMovie() {
       const popularity = +inputpopularity
-      const tags = inputtags //[...inputtags, inputtags.split(', ')]
+      const tags = inputtags.split(', ')
       const data = {
         title, overview, popularity, tags, poster_path
       }
@@ -45,8 +56,8 @@ function FormAddEdit() {
           newMovie: data
         }
       })
+      Swal.fire({icon: 'success', title: 'Movie added'})
       setTimeout(function(){ history.push('/') }, 700);
-      
     }
 
     return (
@@ -90,16 +101,9 @@ function FormAddEdit() {
         </div>
       )
     } else {
-      // setTitle(Movie.movie.title)
-      // setOverview(Movie.movie.overview)
-      // setPoster_path(Movie.movie.poster_path)
-      // setPopularity(Movie.movie.popularity)
-      // setTags(Movie.movie.tags)
-
-  
       function handleEditMovie() {
         const popularity = +inputpopularity
-        const tags = inputtags //[...inputtags, inputtags.split(', ')]
+        const tags = inputtags.split(', ')
         const data = {
           title, overview, popularity, tags, poster_path
         }
@@ -109,6 +113,7 @@ function FormAddEdit() {
             newMovie: data
           }
         })
+        Swal.fire({icon: 'success', title: 'Movie edited'})
         history.push('/')
       }
   
