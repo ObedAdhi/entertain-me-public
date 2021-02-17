@@ -1,7 +1,9 @@
+import FormEdit from "../components/FormAddEdit";
+
 function EditPage () {
   return (
     <div>
-      ini EditPage
+      {<FormEdit/>}
     </div>
   )
 }

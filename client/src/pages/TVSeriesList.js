@@ -6,14 +6,10 @@ import { GET_ALL } from "../config/query";
 
 
 
-function Home () {
-  const { data, loading, error, startPolling, stopPolling } = useQuery(GET_ALL)
+function TVSeriesList () {
+  const { data, loading, error, stopPolling, startPolling } = useQuery(GET_ALL)
   const history = useHistory()
 
-
-  function toAddForm() {
-    history.push('/movies/add')
-  }
 
   if (error) {
     return (
@@ -36,21 +32,6 @@ function Home () {
   } else {
     return (
       <div className={'container mt-4 mb-5'}>
-        <div className={'row'}>
-          
-          <h4 className={'mb-3'}> Movie List </h4>
-          <button onClick={() => toAddForm()} className={'ms-3 mb-3 btn btn-primary col-1'}>Add Movie</button>
-
-          <div className={'row rounded text-center'} style={{overflowX: 'auto', display: 'block', whiteSpace: 'nowrap', backgroundColor: '#d4d4d4'}}>
-            {data.movies.map(movie => {
-              return (
-                <ContentCard key={movie._id} props={movie}/>
-              )
-            })}
-          </div>
-        </div>
-
-        <hr></hr>
 
         <div className={'row'}>
           <h4 className={'mb-3'}> TV Series List </h4>
@@ -73,4 +54,4 @@ function Home () {
   }
 }
 
-export default Home
+export default TVSeriesList
